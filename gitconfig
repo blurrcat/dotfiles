@@ -1,0 +1,39 @@
+[user]
+        name = blurrcat
+        email = blurrcat@gmail.com
+        signkey = CC4D64F1A61F81D3
+[core]
+        editor = vim
+        excludesfile = ~/.gitignore
+[push]
+        default = matching
+[filter "media"]
+        required = true
+        clean = git media clean %f
+        smudge = git media smudge %f
+[filter "hawser"]
+        clean = git hawser clean %f
+        smudge = git hawser smudge %f
+        required = true
+[filter "lfs"]
+        clean = git lfs clean %f
+        smudge = git lfs smudge %f
+        required = true
+[alias]
+        co = checkout
+        br = branch
+        ci = commit
+        st = status
+        last = "log -1 HEAD"
+        unstage = "reset HEAD --"
+        hist = "log --decorate --graph --oneline --all"
+        branches = !legit branches
+        graft = !legit graft
+        harvest = !legit harvest
+        publish = !legit publish
+        unpublish = !legit unpublish
+        sprout = !legit sprout
+        sync = !legit sync
+        switch = !legit switch
+        resync = !legit resync
+        pull = pull --rebase
