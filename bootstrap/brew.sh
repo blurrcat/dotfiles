@@ -2,10 +2,10 @@
 
 set -ex
 
-sudo apt-get install \
+brew install \
     git \
     zsh \
-    zsh-antigen \
+    antigen \
     tmux \
     vim \
     ripgrep \
