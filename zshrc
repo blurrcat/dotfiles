@@ -38,7 +38,6 @@ setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 source $HOME/bin/antigen.zsh
 antigen use oh-my-zsh
 
-antigen bundle brew
 antigen bundle colored-man-pages
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle web-search
@@ -59,3 +58,7 @@ fi
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
 fi
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_CTRL_R_OPTS="--height 40% --layout reverse --color 'fg:#bbccdd,fg+:#ddeeff,bg:#334455,preview-bg:#223344,border:#778899'"
