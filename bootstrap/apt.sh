@@ -3,9 +3,11 @@
 set -ex
 
 sudo apt-get install \
+    bat \
     git \
     zsh \
     tmux \
+    mosh \
     vim \
     ripgrep \
     httpie

@@ -38,6 +38,7 @@ setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 source $HOME/bin/antigen.zsh
 antigen use oh-my-zsh
 
+antigen bundle chrissicool/zsh-256color
 antigen bundle colored-man-pages
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle web-search
