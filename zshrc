@@ -7,6 +7,7 @@ export LANG=en_US.UTF-8
 
 # ripgrep
 export RIPGREP_CONFIG_PATH=$HOME/.ripgreprc
+export BAT_CONFIG_PATH=$HOME/.batrc
 
 export TERM="xterm-256color"
 setopt RM_STAR_WAIT
