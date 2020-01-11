@@ -39,7 +39,7 @@ Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " python
-Plug 'davidhalter/jedi-vim'
+" Plug 'davidhalter/jedi-vim'
 Plug 'hynek/vim-python-pep8-indent'
 " typescript
 Plug 'leafgarland/typescript-vim'
@@ -163,11 +163,13 @@ let g:ale_fixers = {
 \}
 let g:ale_fixers.elixir = ['mix_format']
 let g:ale_linters = {}
-let g:ale_linters.elixir = ['elixir-ls']
-
 let g:ale_linters_ignore = { 'elm': ['make'] }
+let g:ale_linters.elixir = ['elixir-ls']
+let g:ale_linters.python = ['pyls', 'pyflakes', 'mypy']
+let g:ale_python_mypy_ignore_invalid_syntax = 1
+
 let g:ale_elm_ls_use_global = 1
-let g:ale_elixir_elixir_ls_release = '~/elixir/lib/elixir-ls'
+let g:ale_elixir_elixir_ls_release = $HOME . '/lib/elixir-ls'
 nmap <silent> <C-b> <Plug>(ale_fix)
 nmap <silent> <leader>D <Plug>(ale_detail)
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
