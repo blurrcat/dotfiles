@@ -87,6 +87,14 @@ endif
 set background=dark
 colorscheme OceanicNext
 
+" spell
+fun! SpellCheck()
+    setlocal spell
+    syntax match UrlNoSpell '\w\+:\/\/[^[:space:]]\+' contains=@NoSpell
+    syntax match AcronymNoSpell '\<\(\u\|\d\)\{3,}s\?\>' contains=@NoSpell
+endfun
+autocmd FileType markdown,text :call SpellCheck()
+
 " airline
 let g:airline_theme='oceanicnext'
 let g:airline#extensions#tabline#enabled = 1
@@ -165,7 +173,7 @@ let g:ale_fixers.elixir = ['mix_format']
 let g:ale_linters = {}
 let g:ale_linters_ignore = { 'elm': ['make'] }
 let g:ale_linters.elixir = ['elixir-ls']
-let g:ale_linters.python = ['pyls', 'pyflakes', 'mypy']
+let g:ale_linters.python = ['pyls', 'flake8', 'mypy']
 let g:ale_python_mypy_ignore_invalid_syntax = 1
 
 let g:ale_elm_ls_use_global = 1
