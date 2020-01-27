@@ -14,7 +14,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'mhartington/oceanic-next'
-Plug 'rhysd/devdocs.vim'
 Plug 'dbeniamine/cheat.sh-vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
@@ -182,7 +181,6 @@ nmap <silent> <C-b> <Plug>(ale_fix)
 nmap <silent> <leader>D <Plug>(ale_detail)
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
-nmap <silent> <leader>K <Plug>(devdocs-under-cursor)
 nmap <silent> <leader>d :ALEGoToDefinition<CR>
 nmap <silent> <leader>r :ALEFindReferences<CR>
 nmap <silent> <leader>k <Plug>(ale_hover)

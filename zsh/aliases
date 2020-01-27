@@ -1,5 +1,5 @@
 alias tmux='tmux -2'
-alias ta='tmux attach -t'
+alias ta='tmux attach -d -t'
 alias tls='tmux ls'
 alias ezl='vim ~/.zshrc.local'
 alias sz='source ~/.zshrc'
