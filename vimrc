@@ -2,10 +2,7 @@ call plug#begin('~/.vim/plugged')
 
 " language packs
 " elm
-Plug 'antew/vim-elm-language-server'
-" Plug 'ElmCast/elm-vim'
-" Plug 'carmonw/elm-vim'
-Plug 'Zaptic/elm-vim'
+Plug 'andys8/vim-elm-syntax'
 " elixir
 Plug 'elixir-editors/vim-elixir'
 
@@ -91,6 +88,7 @@ fun! SpellCheck()
     setlocal spell
     syntax match UrlNoSpell '\w\+:\/\/[^[:space:]]\+' contains=@NoSpell
     syntax match AcronymNoSpell '\<\(\u\|\d\)\{3,}s\?\>' contains=@NoSpell
+    syntax match AllCaps '\[A-Z]+\' contains=@NoSpell
 endfun
 autocmd FileType markdown,text :call SpellCheck()
 
@@ -170,12 +168,11 @@ let g:ale_fixers = {
 \}
 let g:ale_fixers.elixir = ['mix_format']
 let g:ale_linters = {}
-let g:ale_linters_ignore = { 'elm': ['make'] }
+let g:ale_linters.elm = ['elm_ls']
 let g:ale_linters.elixir = ['elixir-ls']
 let g:ale_linters.python = ['pyls', 'flake8', 'mypy']
 let g:ale_python_mypy_ignore_invalid_syntax = 1
 
-let g:ale_elm_ls_use_global = 1
 let g:ale_elixir_elixir_ls_release = $HOME . '/lib/elixir-ls'
 nmap <silent> <C-b> <Plug>(ale_fix)
 nmap <silent> <leader>D <Plug>(ale_detail)
