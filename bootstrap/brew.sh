@@ -4,12 +4,10 @@ set -ex
 
 brew install \
     git \
-    zsh \
-    antigen \
+    fish \
     tmux \
     vim \
     ripgrep \
-    httpie \
-    fzf
+    httpie
 
 ./common.sh
