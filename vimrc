@@ -88,7 +88,6 @@ fun! SpellCheck()
     setlocal spell
     syntax match UrlNoSpell '\w\+:\/\/[^[:space:]]\+' contains=@NoSpell
     syntax match AcronymNoSpell '\<\(\u\|\d\)\{3,}s\?\>' contains=@NoSpell
-    syntax match AllCaps '\[A-Z]+\' contains=@NoSpell
 endfun
 autocmd FileType markdown,text :call SpellCheck()
 
