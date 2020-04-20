@@ -1,0 +1,7 @@
+--smart-case
+
+--glob
+!git/*
+
+--type-add
+web:*.{html,css,js,jsx,ts,txs}*
