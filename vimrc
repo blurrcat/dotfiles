@@ -17,6 +17,7 @@ Plug 'ervandew/supertab'
 Plug 'honza/vim-snippets'
 Plug 'janko-m/vim-test'
 Plug 'tpope/vim-dispatch'
+Plug 'tpope/vim-sleuth'
 Plug 'Glench/Vim-Jinja2-Syntax'
 Plug 'mattn/emmet-vim'
 Plug 'jremmen/vim-ripgrep'
@@ -25,8 +26,8 @@ Plug 'octref/RootIgnore'
 Plug 'pearofducks/ansible-vim'
 Plug 'raimondi/delimitmate'
 Plug 'SirVer/ultisnips'
-" Linter
 Plug 'w0rp/ale'
+Plug 'natebosch/vim-lsc'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
@@ -34,18 +35,11 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" python
-" Plug 'davidhalter/jedi-vim'
-Plug 'hynek/vim-python-pep8-indent'
-" typescript
+
 Plug 'leafgarland/typescript-vim'
-" stylus
 Plug 'wavded/vim-stylus'
-" golang
-" Plug 'fatih/vim-go'
-" rust
-" Plug 'racer-rust/vim-racer'
-" Plug 'rust-lang/rust.vim'
+
+Plug 'junegunn/goyo.vim'
 
 call plug#end()
 
@@ -66,6 +60,7 @@ set ttimeoutlen=0
 set splitright
 set colorcolumn=80
 set foldmethod=indent
+set backupcopy=yes
 
 " mouse
 set mouse=a
@@ -150,6 +145,25 @@ let g:elm_syntastic_show_warnings = 1
 let g:elm_make_show_warnings = 1
 let g:elm_format_autosave = 1
 
+" LSP client
+let g:lsc_server_commands = {
+\   'elm': 'elm-language-server',
+\   'python': 'pyls',
+\   'ocaml': 'ocamllsp',
+\   'haskell': {
+\       'command': 'haskell-language-server --lsp',
+\       'suppress_stderr': v:true,
+\   }
+\ }
+let g:lsc_auto_map = {
+\   'defaults': v:true,
+\   'ShowHover': 'gk',
+\   'NextReference': 'cn',
+\   'PreviousReference': 'cp',
+\ }
+nmap <silent> gd :LSClientWindowDiagnostics<CR>
+
+
 " Ale
 " let g:ale_lint_on_enter = 0
 let g:ale_lint_on_text_changed = 1
@@ -163,13 +177,21 @@ let g:ale_fixers = {
 \    'javascript': ['eslint'],
 \    'typescript': ['eslint'],
 \    'css': ['prettier'],
-\    'python': ['yapf'],
+\    'python': ['black'],
+\    'elm': ['elm-format'],
+\    'haskell': ['stylish-haskell'],
+\    'ocaml': ['ocamlformat', 'ocp-indent'],
 \}
 let g:ale_fixers.elixir = ['mix_format']
 let g:ale_linters = {}
-let g:ale_linters.elm = ['elm_ls']
+let g:ale_linters.elm = []
 let g:ale_linters.elixir = ['elixir-ls']
-let g:ale_linters.python = ['pyls', 'flake8', 'mypy']
+let g:ale_linters.python = ['mypy']
+let g:ale_linters.haskell = []
+let g:ale_linters.ocaml = []
+
+let g:ale_haskell_hlint_executable = 'stack'
+let g:ale_haskell_stylish_haskell_executable = 'stack'
 let g:ale_python_mypy_ignore_invalid_syntax = 1
 
 let g:ale_elixir_elixir_ls_release = $HOME . '/lib/elixir-ls'
