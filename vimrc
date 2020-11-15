@@ -1,82 +1,78 @@
 call plug#begin('~/.vim/plugged')
 
-" language packs
-" elm
-Plug 'andys8/vim-elm-syntax'
-" elixir
-Plug 'elixir-editors/vim-elixir'
-
-Plug 'scrooloose/nerdtree'
+" IDE
+Plug 'SirVer/ultisnips'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
-Plug 'mhartington/oceanic-next'
-Plug 'dbeniamine/cheat.sh-vim'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'dbeniamine/cheat.sh-vim'
 Plug 'ervandew/supertab'
 Plug 'honza/vim-snippets'
 Plug 'janko-m/vim-test'
-Plug 'tpope/vim-dispatch'
-Plug 'tpope/vim-sleuth'
-Plug 'Glench/Vim-Jinja2-Syntax'
-Plug 'mattn/emmet-vim'
 Plug 'jremmen/vim-ripgrep'
-Plug 'mxw/vim-jsx'
-Plug 'octref/RootIgnore'
-Plug 'pearofducks/ansible-vim'
-Plug 'raimondi/delimitmate'
-Plug 'SirVer/ultisnips'
-Plug 'w0rp/ale'
+Plug 'junegunn/goyo.vim'
+Plug 'mhartington/oceanic-next'
 Plug 'natebosch/vim-lsc'
+Plug 'octref/RootIgnore'
+Plug 'raimondi/delimitmate'
+Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-sleuth'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'w0rp/ale'
 
+" tmux
+Plug 'christoomey/vim-tmux-runner'
+
+" language packs
+Plug 'Glench/Vim-Jinja2-Syntax'
+Plug 'andys8/vim-elm-syntax'
+Plug 'elixir-editors/vim-elixir'
 Plug 'leafgarland/typescript-vim'
+Plug 'mattn/emmet-vim'
+Plug 'mxw/vim-jsx'
+Plug 'pearofducks/ansible-vim'
 Plug 'wavded/vim-stylus'
 
-Plug 'junegunn/goyo.vim'
 
 call plug#end()
 
+" defaults
 filetype plugin indent on
-set nocompatible
-set bs=indent,eol,start
-set encoding=utf-8
-syntax enable
-set number
-set hidden
-set ignorecase
-set smartcase
-set expandtab
-set tabstop=4
-set shiftwidth=4
 set autoindent
-set ttimeoutlen=0
-set splitright
-set colorcolumn=80
-set foldmethod=indent
 set backupcopy=yes
-
-" mouse
+set bs=indent,eol,start
+set colorcolumn=80
+set encoding=utf-8
+set expandtab
+set foldmethod=indent
+set hidden
+set hlsearch incsearch
+set ignorecase
 set mouse=a
+set nocompatible
+set number
+set shiftwidth=4
+set smartcase
+set splitright
+set tabstop=4
+set termguicolors
+set ttimeoutlen=0
+syntax enable
+set background=dark
+colorscheme OceanicNext
 
 " undo
 set undodir=~/.vim/undodir
 set undofile
 set undolevels=1000
 set undoreload=10000
-
-if (has("termguicolors"))
-    set termguicolors
-endif
-
-set background=dark
-colorscheme OceanicNext
 
 " spell
 fun! SpellCheck()
@@ -116,26 +112,13 @@ let NERDTreeWinSize = 30
 let NERDTreeQuitOnOpen = 1
 let NERDTreeAutoDeleteBuffer = 1
 
-" emmet
-let g:user_emmet_settings = {
-\  'javascript.jsx' : {
-\      'extends' : 'jsx',
-\  },
-\  'javascript' : {
-\      'extends' : 'jsx',
-\  },
-\}
-let g:user_emmet_mode = 'a'
 
-" ack
+" ctrlp
 if executable('rg')
-    " ctrlp
     let g:ctrlp_user_command = 'rg --files %s'
     set grepprg=rg\ --vimgrep
     set grepformat^=%f:%l:%c:%m
 endif
-
-" ctrlp
 let g:ctrlp_use_caching = 0
 let g:ctrlp_working_path_mode = 'w'
 let g:ctrlp_custom_ignore = {
@@ -148,8 +131,19 @@ let g:elm_format_autosave = 1
 " LSP client
 let g:lsc_server_commands = {
 \   'elm': 'elm-language-server',
-\   'python': 'pyls',
+\   'python': {
+\       'command': 'pyls',
+\       'workspace_config': {
+\           'pyls': {
+\               'configurationSources': ['flake8'],
+\               'plugins': {
+\                   'yapf': { 'enabled': 0 }
+\               }
+\           }
+\       },
+\   },
 \   'ocaml': 'ocamllsp',
+\   'typescript': 'typescript-language-server --stdio',
 \   'haskell': {
 \       'command': 'haskell-language-server --lsp',
 \       'suppress_stderr': v:true,
@@ -163,16 +157,14 @@ let g:lsc_auto_map = {
 \ }
 nmap <silent> gd :LSClientWindowDiagnostics<CR>
 
-
 " Ale
-" let g:ale_lint_on_enter = 0
 let g:ale_lint_on_text_changed = 1
 let g:ale_set_baloons = 1
 let g:ale_completion_enabled = 1
 let g:ale_command_wrapper = 'nice -n5'
 let g:ale_list_window_size = 5
 let g:ale_fixers = {
-\    '*': ['remove_trailing_lines', 'trim_whitespace'],
+\    '*': ['trim_whitespace'],
 \    'yaml.ansible': ['ansible'],
 \    'javascript': ['eslint'],
 \    'typescript': ['eslint'],
@@ -181,19 +173,19 @@ let g:ale_fixers = {
 \    'elm': ['elm-format'],
 \    'haskell': ['stylish-haskell'],
 \    'ocaml': ['ocamlformat', 'ocp-indent'],
+\    'elixir': ['mix_format'],
 \}
-let g:ale_fixers.elixir = ['mix_format']
-let g:ale_linters = {}
-let g:ale_linters.elm = []
-let g:ale_linters.elixir = ['elixir-ls']
-let g:ale_linters.python = ['mypy']
-let g:ale_linters.haskell = []
-let g:ale_linters.ocaml = []
-
+" disable most linters as they're covered by LSP
+let g:ale_linters = {
+\    'elm': [],
+\    'elixir': ['elixir-ls'],
+\    'python': ['mypy'],
+\    'haskell': ['hlint'],
+\    'ocaml': [],
+\}
 let g:ale_haskell_hlint_executable = 'stack'
 let g:ale_haskell_stylish_haskell_executable = 'stack'
 let g:ale_python_mypy_ignore_invalid_syntax = 1
-
 let g:ale_elixir_elixir_ls_release = $HOME . '/lib/elixir-ls'
 nmap <silent> <C-b> <Plug>(ale_fix)
 nmap <silent> <leader>D <Plug>(ale_detail)
@@ -203,38 +195,58 @@ nmap <silent> <leader>d :ALEGoToDefinition<CR>
 nmap <silent> <leader>r :ALEFindReferences<CR>
 nmap <silent> <leader>k <Plug>(ale_hover)
 
-" highlighting in elm code looks really bad
-au FileType elm let g:ale_set_highlights = 0
-let g:elm_setup_keybindings = 0
-
-" vim-test<cr>
+" vim-test
 let g:test#runner_commands = ['PyTest']
 let test#python#runner = 'pytest'
 let test#go#runner = 'ginkgo'
 let test#go#ginkgo#executable = 'ginkgo watch'
 let test#go#ginkgo#options = '-skipMeasurements'
-" let test#strategy = ''
+let test#strategy = 'vtr'
 nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 nmap <silent> <leader>l :TestLast<CR>
 
+" tmux
+nnoremap <leader>va :VtrAttachToPane<cr>
+nnoremap <leader>vs :VtrSendCommandToRunner<cr>
+nnoremap <leader>vl :VtrSendLinesToRunner<cr>
+nnoremap <leader>vo :VtrOpenRunner<cr>
+nnoremap <leader>vk :VtrKillRunner<cr>
+nnoremap <leader>vd :VtrDetachRunner<cr>
+nnoremap <leader>vc :VtrClearRunner<cr>
+nnoremap <leader>vf :VtrFlushCommand<cr>
+
 " auto-complete
 " disable preview scratch window
 set completeopt=menu,menuone,preview,noinsert,noselect
-" set omnifunc=ale#completion#OmniFunc
 set splitbelow
 " limit popup menu height
 set pumheight=15
 let g:SuperTabDefaultCompletionType = 'context'
 
-" ansible-vim
+" Lang
+
+" elm
+" highlighting in elm code looks really bad
+au FileType elm let g:ale_set_highlights = 0
+let g:elm_setup_keybindings = 0
+
+" emmet
+let g:user_emmet_settings = {
+\  'javascript.jsx' : {
+\      'extends' : 'jsx',
+\  },
+\  'javascript' : {
+\      'extends' : 'jsx',
+\  },
+\}
+let g:user_emmet_mode = 'a'
+
+" ansible
 let g:ansible_name_highlight = 'b'
 let g:ansible_attribute_highlight = 'a'
-
-" search
-set hlsearch incsearch
 
 " rust
 let g:racer_cmd = '~/.cargo/bin/racer'
