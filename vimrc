@@ -39,6 +39,7 @@ Plug 'mattn/emmet-vim'
 Plug 'mxw/vim-jsx'
 Plug 'pearofducks/ansible-vim'
 Plug 'wavded/vim-stylus'
+Plug 'georgewitteman/vim-fish'
 
 
 call plug#end()
