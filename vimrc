@@ -134,6 +134,7 @@ let g:lsc_server_commands = {
 \   'elm': 'elm-language-server',
 \   'python': {
 \       'command': 'pyls',
+\       'log-level': 'ERROR',
 \       'workspace_config': {
 \           'pyls': {
 \               'configurationSources': ['flake8'],
@@ -210,6 +211,8 @@ nmap <silent> <leader>g :TestVisit<CR>
 nmap <silent> <leader>l :TestLast<CR>
 
 " tmux
+let g:VtrOrientation = "h"
+let g:VtrPercentage = 35
 nnoremap <leader>va :VtrAttachToPane<cr>
 nnoremap <leader>vs :VtrSendCommandToRunner<cr>
 nnoremap <leader>vl :VtrSendLinesToRunner<cr>

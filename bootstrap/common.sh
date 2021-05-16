@@ -1,5 +1,7 @@
 #!/usr/bin/env sh
 
+mkdir -p ~/bin ~/lib
+
 # TPM
 mkdir -p ~/.tmux/plugins
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

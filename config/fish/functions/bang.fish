@@ -8,5 +8,5 @@ function bang
             set URL "https://duckduckgo.com/?q=!$BANG $QUERY"
     end
 
-    lynx -dump -nolist -force_html "$URL"
+    lynx -dump -nolist -force_html "$URL" | less
 end

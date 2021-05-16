@@ -10,7 +10,7 @@ sudo apt-get install \
     mosh \
     vim \
     ripgrep \
+    lynx \
     httpie
 
-mkdir -p ~/bin ~/lib
 ./common.sh
