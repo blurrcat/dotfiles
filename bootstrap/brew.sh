@@ -11,7 +11,9 @@ brew install \
     tmux \
     mosh \
     vim \
+    rcm \
     ripgrep \
     lynx \
     httpie
 
+rcup
