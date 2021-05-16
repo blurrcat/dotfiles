@@ -2,7 +2,10 @@
 
 set -ex
 
+./common.sh
+
 brew install \
+    bat \
     git \
     fish \
     tmux \
@@ -12,4 +15,3 @@ brew install \
     lynx \
     httpie
 
-./common.sh

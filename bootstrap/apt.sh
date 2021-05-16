@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 
 set -ex
+./common.sh
 
 sudo apt-get install \
     bat \
@@ -13,4 +14,4 @@ sudo apt-get install \
     lynx \
     httpie
 
-./common.sh
+ln -s /usr/bin/batcat ~/bin/bat
