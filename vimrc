@@ -81,7 +81,7 @@ fun! SpellCheck()
     syntax match UrlNoSpell '\w\+:\/\/[^[:space:]]\+' contains=@NoSpell
     syntax match AcronymNoSpell '\<\(\u\|\d\)\{3,}s\?\>' contains=@NoSpell
 endfun
-autocmd FileType markdown,text :call SpellCheck()
+" autocmd FileType markdown,text :call SpellCheck()
 
 " airline
 let g:airline_theme='oceanicnext'
@@ -133,16 +133,12 @@ let g:elm_format_autosave = 1
 let g:lsc_server_commands = {
 \   'elm': 'elm-language-server',
 \   'python': {
-\       'command': 'pyls',
-\       'log-level': 'ERROR',
+\       'command': 'pyls --log-file /dev/null',
 \       'workspace_config': {
 \           'pyls': {
 \               'configurationSources': ['flake8'],
-\               'plugins': {
-\                   'yapf': { 'enabled': 0 }
-\               }
-\           }
-\       },
+\           },
+\       }
 \   },
 \   'ocaml': 'ocamllsp',
 \   'typescript': 'typescript-language-server --stdio',
@@ -224,7 +220,8 @@ nnoremap <leader>vf :VtrFlushCommand<cr>
 
 " auto-complete
 " disable preview scratch window
-set completeopt=menu,menuone,preview,noinsert,noselect
+" set completeopt=menu,menuone,longest
+set completeopt=longest,menuone
 set splitbelow
 " limit popup menu height
 set pumheight=15
