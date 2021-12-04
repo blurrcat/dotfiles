@@ -6,7 +6,6 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'dbeniamine/cheat.sh-vim'
 Plug 'ervandew/supertab'
 Plug 'honza/vim-snippets'
 Plug 'janko-m/vim-test'
@@ -40,6 +39,7 @@ Plug 'mxw/vim-jsx'
 Plug 'pearofducks/ansible-vim'
 Plug 'wavded/vim-stylus'
 Plug 'georgewitteman/vim-fish'
+Plug 'hhvm/vim-hack'
 
 
 call plug#end()
@@ -145,11 +145,11 @@ let g:lsc_server_commands = {
 \   'haskell': {
 \       'command': 'haskell-language-server --lsp',
 \       'suppress_stderr': v:true,
-\   }
+\   },
+\   'hack': 'hh_client lsp --from vim'
 \ }
 let g:lsc_auto_map = {
 \   'defaults': v:true,
-\   'ShowHover': 'gk',
 \   'NextReference': 'cn',
 \   'PreviousReference': 'cp',
 \ }
@@ -169,7 +169,7 @@ let g:ale_fixers = {
 \    'css': ['prettier'],
 \    'python': ['black'],
 \    'elm': ['elm-format'],
-\    'haskell': ['stylish-haskell'],
+\    'haskell': ['hlint'],
 \    'ocaml': ['ocamlformat', 'ocp-indent'],
 \    'elixir': ['mix_format'],
 \}
@@ -180,6 +180,7 @@ let g:ale_linters = {
 \    'python': ['mypy'],
 \    'haskell': ['hlint'],
 \    'ocaml': [],
+\    'hack': []
 \}
 let g:ale_haskell_hlint_executable = 'stack'
 let g:ale_haskell_stylish_haskell_executable = 'stack'
@@ -204,7 +205,7 @@ nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
 nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>g :TestVisit<CR>
-nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>l :VtrSendCommandToRunner<CR>
 
 " tmux
 let g:VtrOrientation = "h"
