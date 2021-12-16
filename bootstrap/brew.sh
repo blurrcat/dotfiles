@@ -5,12 +5,13 @@ set -ex
 ./common.sh
 
 brew install \
+    alacritty \
     bat \
     git \
     fish \
     tmux \
     mosh \
-    vim \
+    neovim \
     rcm \
     ripgrep \
     lynx \

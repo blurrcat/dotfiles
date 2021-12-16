@@ -3,7 +3,7 @@
         email = blurrcat@gmail.com
         signkey = CC4D64F1A61F81D3
 [core]
-        editor = vim
+        editor = nvim
         excludesfile = ~/.gitignore
 [push]
         default = matching

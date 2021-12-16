@@ -9,12 +9,13 @@ echo "deb https://apt.thoughtbot.com/debian/ stable main" | sudo tee /etc/apt/so
 sudo apt-get update
 
 sudo apt-get install \
+    alacritty \
     bat \
     git \
     fish \
     tmux \
     mosh \
-    vim \
+    neovim \
     rcm \
     ripgrep \
     lynx \
