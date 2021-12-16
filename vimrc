@@ -45,6 +45,7 @@ set expandtab
 set foldmethod=indent
 set mouse=a
 set number
+set ignorecase
 set smartcase
 set splitright
 set termguicolors
