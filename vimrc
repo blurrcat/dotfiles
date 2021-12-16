@@ -19,6 +19,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-sleuth'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'w0rp/ale'
@@ -103,7 +104,7 @@ let g:ctrlp_custom_ignore = {
 let g:lsc_server_commands = {
 \   'elm': 'elm-language-server',
 \   'python': {
-\       'command': 'pyls --log-file /dev/null',
+\       'command': 'pylsp --log-file /dev/null',
 \       'workspace_config': {
 \           'pyls': {
 \               'configurationSources': ['flake8'],
