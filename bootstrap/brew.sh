@@ -2,8 +2,6 @@
 
 set -ex
 
-./common.sh
-
 brew install \
     alacritty \
     bat \
@@ -17,4 +15,4 @@ brew install \
     lynx \
     httpie
 
-rcup
+./common.sh

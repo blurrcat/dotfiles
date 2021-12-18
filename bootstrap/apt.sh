@@ -1,7 +1,6 @@
 #!/usr/bin/env sh
 
 set -ex
-./common.sh
 
 # add repo for rcm
 sudo wget -q https://apt.thoughtbot.com/thoughtbot.gpg.key -O /etc/apt/trusted.gpg.d/thoughtbot.gpg
@@ -23,4 +22,4 @@ sudo apt-get install \
 
 ln -s /usr/bin/batcat ~/bin/bat
 
-rcup
+./common.sh

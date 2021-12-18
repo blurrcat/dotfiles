@@ -5,6 +5,8 @@
 0. get this repo: `git clone https://github.com/blurrcat/dotfiles.git ~/.dotfiles && cd ~/.dotfiles`
 1. `./bootstrap/brew.sh` or `./bootstrap/apt.sh` depending on your OS
 
+**WARNING: this will overwrite any existing config files for the software mentioned below!!**
+
 ## configurations
 
 1. install vim plugins:
@@ -15,7 +17,6 @@
   - open tmux
   - ctrl-a + I
 3. fish: run `fish_config`
-
 
 ## profit!
 
