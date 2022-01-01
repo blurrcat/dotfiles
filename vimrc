@@ -51,7 +51,7 @@ set ignorecase
 set smartcase
 set splitright
 set termguicolors
-set completeopt=menu,menuone,noinsert
+set completeopt=menu,menuone,noinsert,noselect
 set pumheight=15
 colorscheme OceanicNext
 
@@ -117,7 +117,7 @@ let g:lsc_server_commands = {
 \   'ocaml': 'ocamllsp',
 \   'typescript': 'typescript-language-server --stdio',
 \   'haskell': {
-\       'command': 'haskell-language-server --lsp',
+\       'command': 'haskell-language-server-wrapper --lsp',
 \       'suppress_stderr': v:true,
 \   },
 \   'hack': 'hh_client lsp --from vim'
