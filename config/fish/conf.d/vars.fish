@@ -4,4 +4,5 @@ set -gx N_PREFIX $HOME/n
 set -gx PROJECT_HOME $HOME/workspace
 set -gx EDITOR nvim
 set -gx RIPGREP_CONFIG_PATH $HOME/.ripgreprc
-set -g fish_user_paths $fish_user_paths ~/.local/bin
+fish_add_path ~/.local/bin
+fish_add_path ~/.ghcup/bin

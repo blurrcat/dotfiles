@@ -37,6 +37,7 @@ Plug 'mxw/vim-jsx'
 Plug 'wavded/vim-stylus'
 Plug 'georgewitteman/vim-fish'
 Plug 'hhvm/vim-hack'
+Plug 'pearofducks/ansible-vim'
 
 
 call plug#end()
@@ -107,7 +108,7 @@ let g:ctrlp_custom_ignore = {
 let g:lsc_server_commands = {
 \   'elm': 'elm-language-server',
 \   'python': {
-\       'command': 'pylsp --log-file /dev/null',
+\       'command': 'pyls --log-file /dev/null',
 \       'workspace_config': {
 \           'pyls': {
 \               'configurationSources': ['flake8'],
@@ -118,7 +119,6 @@ let g:lsc_server_commands = {
 \   'typescript': 'typescript-language-server --stdio',
 \   'haskell': {
 \       'command': 'haskell-language-server-wrapper --lsp',
-\       'suppress_stderr': v:true,
 \   },
 \   'hack': 'hh_client lsp --from vim'
 \ }
@@ -142,15 +142,14 @@ let g:ale_fixers = {
 \    'javascript': ['eslint'],
 \    'typescript': ['eslint'],
 \    'css': ['prettier'],
-\    'python': ['black'],
 \    'elm': ['elm-format'],
-\    'haskell': ['hlint'],
+\    'python': ['black'],
+\    'haskell': ['hlint', 'ormolu'],
 \    'ocaml': ['ocamlformat', 'ocp-indent'],
 \    'elixir': ['mix_format'],
 \}
 " disable most linters as they're covered by LSP
 let g:ale_linters = {
-\    'elm': [],
 \    'elixir': ['elixir-ls'],
 \    'python': ['mypy'],
 \    'haskell': [],
@@ -158,7 +157,7 @@ let g:ale_linters = {
 \    'hack': []
 \}
 let g:ale_haskell_hlint_executable = 'stack'
-let g:ale_haskell_stylish_haskell_executable = 'stack'
+let g:ale_haskell_ormolu_executable = 'stack'
 let g:ale_python_mypy_ignore_invalid_syntax = 1
 let g:ale_elixir_elixir_ls_release = $HOME . '/lib/elixir-ls'
 nmap <silent> <C-b> <Plug>(ale_fix)
@@ -173,6 +172,7 @@ nmap <silent> <leader>k <Plug>(ale_hover)
 " {{{ vim-test
 let g:test#runner_commands = ['PyTest']
 let test#python#runner = 'pytest'
+let g:test#python#pytest#file_pattern = '\v.*.py$'
 let test#strategy = 'vtr'
 nmap <silent> <leader>t :TestNearest<CR>
 nmap <silent> <leader>T :TestFile<CR>
@@ -227,7 +227,6 @@ let g:user_emmet_mode = 'a'
 let g:racer_cmd = '~/.cargo/bin/racer'
 let g:rustfmt_autosave = 1
 " }}}
-
 
 " {{{ text
 fun! SpellCheck()

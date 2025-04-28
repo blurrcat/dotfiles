@@ -1,5 +1,4 @@
 if status --is-interactive
-    abbr -a -U dokku $HOME/lib/dokku/contrib/dokku_client.sh
     abbr -a -U ddgr ddgr -n 7
     abbr -a -U tmux tmux -2
     abbr -a -U ta tmux attach -d -t
