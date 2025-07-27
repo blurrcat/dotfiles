@@ -17,4 +17,5 @@
         last = "log -1 HEAD"
         unstage = "reset HEAD --"
         hist = "log --decorate --graph --oneline --all"
-        pull = pull --rebase
+[pull]
+	rebase = true

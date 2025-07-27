@@ -3,5 +3,8 @@
 --glob
 !git/*
 
+--glob
+!dune.lock/*
+
 --type-add
 web:*.{html,css,js,jsx,ts,txs}*
