@@ -211,7 +211,14 @@ require('lazy').setup({
     },
     opts_extend = { "sources.default" }
   },
-
+  {
+    "ibhagwan/fzf-lua",
+    -- optional for icon support
+    -- dependencies = { "nvim-tree/nvim-web-devicons" },
+    -- or if using mini.icons/mini.nvim
+    -- dependencies = { "echasnovski/mini.icons" },
+    opts = {}
+  },
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
   {
@@ -673,16 +680,23 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end
 })
 
-lspconfig.ocamllsp.setup({
-  settings = {
-    ocamllsp = {
-      codelens = { enable = true }
-    }
-  },
-  on_attach = function(client, bufnr)
-    vim.lsp.codelens.refresh()
-  end
-})
+-- if vim.fs.basename(vim.fn.getcwd()) == "golden-sheaf" then
+--   vim.lsp.config['ocamllsp'] = {
+--     cmd = { 'make', 'dev-lsp' },
+--   }
+-- else
+  lspconfig.ocamllsp.setup({
+    settings = {
+      ocamllsp = {
+        codelens = { enable = true }
+      }
+    },
+    on_attach = function(client, bufnr)
+      vim.lsp.codelens.refresh()
+    end
+  })
+-- end
+vim.lsp.enable('ocamllsp')
 
 -- Setup neovim lua configuration
 require('neodev').setup()
