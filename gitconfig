@@ -1,21 +1,20 @@
 [user]
-        name = blurrcat
-        email = blurrcat@gmail.com
-        signkey = CC4D64F1A61F81D3
+  name = blurrcat
+  email = blurrcat@pm.me
 [core]
-        editor = nvim
-        excludesfile = ~/.gitignore
+  editor = nvim
+  excludesfile = ~/.gitignore
 [push]
-        default = matching
+  default = matching
 [merge]
-        ff = no
+  ff = no
 [alias]
-        co = checkout
-        br = branch
-        ci = commit
-        st = status
-        last = "log -1 HEAD"
-        unstage = "reset HEAD --"
-        hist = "log --decorate --graph --oneline --all"
+  co = checkout
+  br = branch
+  ci = commit
+  st = status
+  last = "log -1 HEAD"
+  unstage = "reset HEAD --"
+  hist = "log --decorate --graph --oneline --all"
 [pull]
-	rebase = true
+  rebase = true
