@@ -17,11 +17,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- NOTE: Here is where you install your plugins.
---  You can configure plugins using the `config` key.
---
---  You can also configure plugins after the setup call,
---    as they will be available in your neovim runtime.
+
 require('lazy').setup({
   -- Git related plugins
   'tpope/vim-fugitive',
@@ -75,6 +71,11 @@ require('lazy').setup({
         preset = 'default',
         ['<C-j>'] = { 'select_next', 'fallback' },
         ['<C-k>'] = { 'select_prev', 'fallback' },
+      },
+
+      cmdline = {
+        keymap = { preset = 'inherit' },
+        completion = { menu = { auto_show = true } },
       },
 
       appearance = {
@@ -339,6 +340,7 @@ fzf.setup({
     }
   }
 })
+fzf.register_ui_select()
 
 -- Harpoon
 local harpoon = require("harpoon")
@@ -362,6 +364,7 @@ require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
   ensure_installed = { 
     'tsx',
+    'gleam',
     'typescript',
     'json',
     'vim',
@@ -449,7 +452,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     end
 
     nmap('gR', vim.lsp.buf.rename, '[R]e[n]ame')
-    nmap('ga', '<cmd>FzfLua code_action<CR>', '[C]ode [A]ction')
+    nmap('ga', '<cmd>FzfLua lsp_code_actions<CR>', '[C]ode [A]ction')
     nmap('gl', vim.lsp.codelens.run, '[C]ode [L]enses')
 
     nmap('<C-]>', vim.lsp.buf.definition, '[G]oto [D]efinition')
@@ -477,12 +480,12 @@ vim.api.nvim_create_autocmd('LspAttach', {
     nmap('gF', vim.lsp.buf.format, '[F]ormat current buffer with LSP')
 
     -- auto-format before write
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = buffer,
-      callback = function()
-        vim.lsp.buf.format { async = false }
-      end
-    })
+    -- vim.api.nvim_create_autocmd("BufWritePre", {
+    --   buffer = buffer,
+    --   callback = function()
+    --     vim.lsp.buf.format { async = false }
+    --   end
+    -- })
   end
 })
 
@@ -505,6 +508,19 @@ end
 vim.lsp.enable('ocamllsp')
 vim.g.no_ocaml_maps = 1
 
+vim.lsp.config('tailwindcss', {
+  settings = {
+    tailwindCSS = {
+      classAttributes = { "class_" },
+      includeLanguages = {
+        ocaml = "html"
+      }
+    }
+  }
+})
+vim.lsp.enable('tailwindcss')
+vim.lsp.enable('gleam')
+
 -- Setup neovim lua configuration
 require('neodev').setup()
 
@@ -523,6 +539,15 @@ vim.keymap.set('n', '<leader>l', ':TestLast<CR>', { desc = 're-run [l]ast test r
 vim.keymap.set('n', '<leader>x', ':bd<CR>', { desc = 'close current buffer' })
 vim.keymap.set('n', '<leader>n', ':bn<CR>', { desc = 'go to [n]ext buffer' })
 vim.keymap.set('n', '<leader>p', ':bp<CR>', { desc = 'go to [p]revious buffer' })
+vim.keymap.set('n', '<leader>c', function()
+  vim.cmd('write')
+  local buf_name = vim.api.nvim_buf_get_name(0)
+  local line_num = vim.api.nvim_win_get_cursor(0)[1]
+  local msg = string.format("Please complete the task at %s:%d", buf_name, line_num)
+  vim.cmd('VtrAttachToPane 2')
+  vim.cmd('VtrSendCommand ' .. vim.fn.shellescape(msg))
+end, { desc = '[c]all opencode to complete task' })
+
 for i = 1,10,1
   do
   vim.keymap.set('n', '<leader>'..i, ':LualineBuffersJump! '..i..'<CR>', { desc = 'jump to buffer ' .. i, silent = true })
@@ -533,12 +558,13 @@ vim.keymap.set('n', '<leader>$', ':LualineBuffersJump! $<CR>', { desc = 'jump to
 vim.keymap.set('n', '<leader>va', ':VtrAttachToPane<CR>', { desc = '[a]ttach to tmux pane' })
 vim.keymap.set('n', '<leader>vs', ':VtrSendCommandToRunner<CR>', { desc = '[v]tr: [s]end command' })
 vim.keymap.set('n', '<leader>vc', ':VtrFlushCommand<CR>', { desc = '[v]tr: [c]lear command' })
--- automatically attach to window 1
-vim.api.nvim_command('autocmd VimEnter * VtrAttachToPane 1')
+-- automatically attach to window 2
+vim.api.nvim_command('autocmd VimEnter * VtrAttachToPane 2')
 
 
 vim.opt.scrolloff = 23
 vim.o.autoread = true
+
 vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter", "CursorHold" }, {
   command = "checktime"
 })

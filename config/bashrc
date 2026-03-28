@@ -1,0 +1,2 @@
+alias ll="ls -l"
+export PATH=$HOME/.cache/rebar3/bin:$PATH
