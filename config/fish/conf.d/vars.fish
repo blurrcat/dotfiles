@@ -5,3 +5,4 @@ set -gx RIPGREP_CONFIG_PATH $HOME/.ripgreprc
 set -gx SHELL /usr/bin/fish
 fish_add_path ~/.local/bin
 fish_add_path ~/.cache/rebar3/bin
+fish_add_path ~/.npm-global/bin

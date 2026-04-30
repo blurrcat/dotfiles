@@ -31,24 +31,13 @@ require('lazy').setup({
   'vim-test/vim-test',
   'christoomey/vim-tmux-runner',
 
-  -- NOTE: This is where your plugins related to LSP can be installed.
-  --  The configuration is done below. Search for lspconfig to find it below.
   {
     -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
-    dependencies = {
-      -- Additional lua configuration, makes nvim stuff amazing!
-      'folke/neodev.nvim',
-    },
   },
-
   -- motion
-  { 'ggandor/leap.nvim',
+  { url = "https://codeberg.org/andyg/leap.nvim",
     dependencies = { 'tpope/vim-repeat' },
-    config = function()
-      local leap = require('leap')
-      leap.add_default_mappings()
-    end,
   },
 
   {
@@ -195,15 +184,16 @@ require('lazy').setup({
     dependencies = { "nvim-lua/plenary.nvim" }
   },
 
-  {
-    -- Highlight, edit, and navigate code
-    'nvim-treesitter/nvim-treesitter',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-    },
-    build = ":TSUpdate",
-    lazy = false,
-  },
+  -- {
+  --   -- Highlight, edit, and navigate code
+  --   'nvim-treesitter/nvim-treesitter',
+  --   branch = 'master',
+  --   dependencies = {
+  --     'nvim-treesitter/nvim-treesitter-textobjects',
+  --   },
+  --   build = ":TSUpdate",
+  --   lazy = false,
+  -- },
 
 }, {
     checker = {
@@ -360,75 +350,75 @@ vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
-require('nvim-treesitter.configs').setup {
-  -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 
-    'tsx',
-    'gleam',
-    'typescript',
-    'json',
-    'vim',
-    'lua',
-    'python',
-    'haskell',
-    'elm',
-    'javascript',
-    'css',
-    'ocaml',
-    'markdown',
-    'markdown_inline'
-  },
-
-  -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-  auto_install = false,
-
-  highlight = { enable = true },
-  indent = { enable = true, disable = { 'python' } },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = '<c-space>',
-      node_incremental = '<c-space>',
-      scope_incremental = '<c-s>',
-      node_decremental = '<M-space>',
-    },
-  },
-  textobjects = {
-    select = {
-      enable = true,
-      lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-      keymaps = {
-        -- You can use the capture groups defined in textobjects.scm
-        ['aa'] = '@parameter.outer',
-        ['ia'] = '@parameter.inner',
-        ['af'] = '@function.outer',
-        ['if'] = '@function.inner',
-        ['ac'] = '@class.outer',
-        ['ic'] = '@class.inner',
-      },
-    },
-    move = {
-      enable = true,
-      set_jumps = true, -- whether to set jumps in the jumplist
-      goto_next_start = {
-        [']m'] = '@function.outer',
-        [']]'] = '@class.outer',
-      },
-      goto_next_end = {
-        [']M'] = '@function.outer',
-        [']['] = '@class.outer',
-      },
-      goto_previous_start = {
-        ['[m'] = '@function.outer',
-        ['[['] = '@class.outer',
-      },
-      goto_previous_end = {
-        ['[M'] = '@function.outer',
-        ['[]'] = '@class.outer',
-      },
-    },
-  },
-}
+-- require('nvim-treesitter.configs').setup {
+--   -- Add languages to be installed here that you want installed for treesitter
+--   ensure_installed = { 
+--     'tsx',
+--     -- 'hyperscript',
+--     'gleam',
+--     'typescript',
+--     'json',
+--     'vim',
+--     'lua',
+--     'python',
+--     'elm',
+--     'javascript',
+--     'css',
+--     'ocaml',
+--     'markdown',
+--     'markdown_inline'
+--   },
+--
+--   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
+--   auto_install = false,
+--
+--   highlight = { enable = true, additional_vim_regex_highlighting = false },
+--   indent = { enable = true, disable = { 'python' } },
+--   incremental_selection = {
+--     enable = true,
+--     keymaps = {
+--       init_selection = '<c-space>',
+--       node_incremental = '<c-space>',
+--       scope_incremental = '<c-s>',
+--       node_decremental = '<M-space>',
+--     },
+--   },
+--   textobjects = {
+--     select = {
+--       enable = true,
+--       lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+--       keymaps = {
+--         -- You can use the capture groups defined in textobjects.scm
+--         ['aa'] = '@parameter.outer',
+--         ['ia'] = '@parameter.inner',
+--         ['af'] = '@function.outer',
+--         ['if'] = '@function.inner',
+--         ['ac'] = '@class.outer',
+--         ['ic'] = '@class.inner',
+--       },
+--     },
+--     move = {
+--       enable = true,
+--       set_jumps = true, -- whether to set jumps in the jumplist
+--       goto_next_start = {
+--         [']m'] = '@function.outer',
+--         [']]'] = '@class.outer',
+--       },
+--       goto_next_end = {
+--         [']M'] = '@function.outer',
+--         [']['] = '@class.outer',
+--       },
+--       goto_previous_start = {
+--         ['[m'] = '@function.outer',
+--         ['[['] = '@class.outer',
+--       },
+--       goto_previous_end = {
+--         ['[M'] = '@function.outer',
+--         ['[]'] = '@class.outer',
+--       },
+--     },
+--   },
+-- }
 
 -- Diagnostic
 vim.keymap.set('n', 'gdn', vim.diagnostic.goto_prev, { desc = "Go to previous diagnostic message" })
@@ -436,7 +426,6 @@ vim.keymap.set('n', 'gdp', vim.diagnostic.goto_next, { desc = "Go to next diagno
 vim.keymap.set('n', 'go', vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 
 -- LSP
-local lspconfig = require('lspconfig')
 vim.keymap.set('n', '<leader>lr', ':LspRestart<CR>', { desc = 'restart LSP' })
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -489,25 +478,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
   end
 })
 
-if vim.fs.basename(vim.fn.getcwd()) == "golden-sheaf" then
-  vim.lsp.config['ocamllsp'] = {
-    cmd = { 'make', 'dev-lsp' },
-  }
-else
-  lspconfig.ocamllsp.setup({
-    settings = {
-      ocamllsp = {
-        codelens = { enable = true }
-      }
-    },
-    on_attach = function(client, bufnr)
-      vim.lsp.codelens.refresh()
-    end
-  })
-end
-vim.lsp.enable('ocamllsp')
-vim.g.no_ocaml_maps = 1
-
 vim.lsp.config('tailwindcss', {
   settings = {
     tailwindCSS = {
@@ -520,9 +490,6 @@ vim.lsp.config('tailwindcss', {
 })
 vim.lsp.enable('tailwindcss')
 vim.lsp.enable('gleam')
-
--- Setup neovim lua configuration
-require('neodev').setup()
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

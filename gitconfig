@@ -4,8 +4,12 @@
 [core]
   editor = nvim
   excludesfile = ~/.gitignore
+  pager = delta
+[interactive]
+  diffFilter = delta --color-only
+
 [push]
-  default = matching
+	default = current
 [merge]
   ff = no
 [alias]
@@ -16,5 +20,10 @@
   last = "log -1 HEAD"
   unstage = "reset HEAD --"
   hist = "log --decorate --graph --oneline --all"
+  df = "diff -w --patience"
 [pull]
   rebase = true
+[delta]
+  navigate = true
+[merge]
+  conflictStyle = zdiff3
