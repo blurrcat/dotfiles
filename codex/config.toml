@@ -12,9 +12,8 @@ model_instructions_file = "~/AGENTS.md"
 trust_level = "trusted"
 
 [tui]
-animations = false
 notifications = false
-status_line = ["model-with-reasoning", "run-state", "context-remaining", "context-used", "five-hour-limit", "weekly-limit", "total-input-tokens", "total-output-tokens", "task-progress"]
+status_line = ["model-with-reasoning", "run-state", "context-remaining", "five-hour-limit", "weekly-limit", "total-input-tokens", "total-output-tokens", "task-progress"]
 status_line_use_colors = true
 
 [tui.model_availability_nux]
@@ -23,14 +22,10 @@ status_line_use_colors = true
 [features]
 memories = true
 codex_git_commit = false
-plugin_hooks = true
 fast_mode = false
 
 [memories]
 disable_on_external_context = true
-
-[plugins."superpowers@openai-curated"]
-enabled = true
 
 [shell_environment_policy]
 include_only = ["PATH", "HOME"]

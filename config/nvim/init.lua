@@ -510,7 +510,7 @@ vim.keymap.set('n', '<leader>c', function()
   vim.cmd('write')
   local buf_name = vim.api.nvim_buf_get_name(0)
   local line_num = vim.api.nvim_win_get_cursor(0)[1]
-  local msg = string.format("complete task at %s:%d", buf_name, line_num)
+  local msg = string.format("do task at %s:%d. Remove the todo after done", buf_name, line_num)
   vim.cmd('VtrAttachToPane 2')
   vim.cmd('VtrSendCommand ' .. vim.fn.shellescape(msg))
 end, { desc = '[c]all opencode to complete task' })
