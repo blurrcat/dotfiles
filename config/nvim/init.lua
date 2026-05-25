@@ -508,12 +508,36 @@ vim.keymap.set('n', '<leader>n', ':bn<CR>', { desc = 'go to [n]ext buffer' })
 vim.keymap.set('n', '<leader>p', ':bp<CR>', { desc = 'go to [p]revious buffer' })
 vim.keymap.set('n', '<leader>c', function()
   vim.cmd('write')
-  local buf_name = vim.api.nvim_buf_get_name(0)
+  local buf_name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':.')
   local line_num = vim.api.nvim_win_get_cursor(0)[1]
-  local msg = string.format("do task at %s:%d. Remove the todo after done", buf_name, line_num)
-  vim.cmd('VtrAttachToPane 2')
-  vim.cmd('VtrSendCommand ' .. vim.fn.shellescape(msg))
-end, { desc = '[c]all opencode to complete task' })
+  local context_start = math.max(1, line_num - 2)
+  local context_end = math.min(vim.api.nvim_buf_line_count(0), line_num + 2)
+  local context_lines = vim.api.nvim_buf_get_lines(0, context_start - 1, context_end, false)
+  local formatted_context = {}
+
+  for index, line in ipairs(context_lines) do
+    local current_context_line_num = context_start + index - 1
+    local prefix = current_context_line_num == line_num and '> ' or '  '
+    table.insert(formatted_context, string.format("%s%d: %s", prefix, current_context_line_num, line))
+  end
+
+  local msg = string.format(
+    "do task at %s:%d. Remove task after done: \n%s",
+    buf_name,
+    line_num,
+    table.concat(formatted_context, "\n")
+  )
+  local msg_file = vim.fn.tempname()
+  vim.fn.writefile(vim.split(msg, "\n", { plain = true }), msg_file)
+  -- test if Enter works now
+  local tmux_command = 'tmux load-buffer ' .. vim.fn.shellescape(msg_file)
+    .. ' && tmux paste-buffer -t 2'
+    .. ' && sleep 0.02'
+    .. ' && tmux send-keys -t 2 Enter'
+  vim.fn.system(tmux_command)
+
+  vim.fn.delete(msg_file)
+end, { desc = 'call coding agent to complete task' })
 
 for i = 1,10,1
   do

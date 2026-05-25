@@ -4,4 +4,5 @@ if status --is-interactive
     abbr -a ta tmux attach -d -t
     abbr -a tls tmux ls
     abbr -a tn tmux new -s
+    abbr -a cdx codex --yolo \$caveman
 end

@@ -1,19 +1,28 @@
 model = "gpt-5.5"
-model_reasoning_effort = "medium"
+model_reasoning_effort = "high"
 model_reasoning_summary = "concise"
 
 sandbox_mode = "workspace-write"
 
-vim_mode = true
 
 model_instructions_file = "~/AGENTS.md"
 
 [projects."/home/blurrcat/workspace/gleam/chat"]
 trust_level = "trusted"
 
+[projects."/home/blurrcat/.dotfiles"]
+trust_level = "trusted"
+
+[projects."/home/blurrcat/workspace/gleam/webapp"]
+trust_level = "trusted"
+
+[projects."/home/blurrcat/workspace/gleam"]
+trust_level = "trusted"
+
 [tui]
+vim_mode_default = true
 notifications = false
-status_line = ["model-with-reasoning", "run-state", "context-remaining", "five-hour-limit", "weekly-limit", "total-input-tokens", "total-output-tokens", "task-progress"]
+status_line = ["model-with-reasoning", "context-remaining", "five-hour-limit", "weekly-limit", "total-input-tokens", "total-output-tokens", "task-progress"]
 status_line_use_colors = true
 
 [tui.model_availability_nux]
