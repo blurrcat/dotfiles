@@ -47,3 +47,6 @@ enabled = false
 
 [feedback]
 enabled = false
+
+[notice]
+hide_rate_limit_model_nudge = false
