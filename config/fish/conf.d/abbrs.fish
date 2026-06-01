@@ -5,4 +5,5 @@ if status --is-interactive
     abbr -a tls tmux ls
     abbr -a tn tmux new -s
     abbr -a cdx codex --yolo \$caveman
+    abbr -a pi pi --offline
 end

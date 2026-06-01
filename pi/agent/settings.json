@@ -1,0 +1,16 @@
+{
+  "lastChangelogVersion": "0.77.0",
+  "enableInstallTelemetry": false,
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.5",
+  "quietStartup": true,
+  "packages": [
+    "https://github.com/badlogic/pi-mono/",
+    "npm:pi-memory"
+  ],
+  "defaultThinkingLevel": "high",
+  "hideThinkingBlock": true,
+  "pi-memory": {
+    "path": "~/pi-memory"
+  }
+}
