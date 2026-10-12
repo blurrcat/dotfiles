@@ -25,6 +25,9 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
+  -- Elixir and EEx/HEEx/LEEx syntax highlighting
+  'elixir-editors/vim-elixir',
+
   -- automatic closing of quotes, parenthesis, brackets, etc
   'Raimondi/delimitMate',
 
@@ -203,6 +206,16 @@ require('lazy').setup({
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
+
+vim.cmd('syntax on')
+
+-- vim-elixir provides the template syntax as eelixir; keep HEEx's filetype for LSP.
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = 'heex',
+  callback = function()
+    vim.cmd('runtime! syntax/eelixir.vim')
+  end,
+})
 
 -- Set highlight on search
 vim.o.hlsearch = true

@@ -2,15 +2,15 @@
   "lastChangelogVersion": "1.1.0",
   "enableInstallTelemetry": false,
   "defaultProvider": "openai-codex",
-  "defaultModel": "gpt-5.6-sol",
+  "defaultModel": "gpt-6-luna",
   "quietStartup": true,
   "packages": [
     "https://github.com/badlogic/pi-mono/"
   ],
-  "defaultThinkingLevel": "medium",
+  "defaultThinkingLevel": "xhigh",
   "enabledModels": [
-    "openai-codex/gpt-5.6-*",
-    "openrouter/xiaomi/mimo-v2.5-pro"
+    "openai-codex/gpt-6-luna",
+    "openai-codex/gpt-6-sol"
   ],
   "hideThinkingBlock": true,
   "pi-memory": {
