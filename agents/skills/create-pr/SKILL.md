@@ -28,6 +28,8 @@ changed and why. Use git only to verify details and line numbers.
 4. Add a few inline comments for important non-obvious changes.
 5. Report the PR URL and inline comment count.
 
+Note you only need to add comments when you first create a PR. No need to do it when you push more commits unless user asks it.
+
 ## PR Body
 
 Keep it concise. Explain why, not just what.

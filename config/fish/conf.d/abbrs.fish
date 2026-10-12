@@ -6,4 +6,5 @@ if status --is-interactive
     abbr -a tn tmux new -s
     abbr -a cdx codex --yolo \$caveman
     abbr -a pi pi --offline
+    abbr -a dokku ssh dokku@everchild-dokku
 end

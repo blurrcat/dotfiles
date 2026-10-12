@@ -490,6 +490,7 @@ vim.lsp.config('tailwindcss', {
 })
 vim.lsp.enable('tailwindcss')
 vim.lsp.enable('gleam')
+vim.lsp.enable('elixir')
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

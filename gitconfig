@@ -27,3 +27,9 @@
   navigate = true
 [merge]
   conflictStyle = zdiff3
+[credential "https://github.com"]
+	helper = 
+	helper = !/home/blurrcat/.local/share/mise/installs/gh/2.93.0/gh_2.93.0_linux_amd64/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/home/blurrcat/.local/share/mise/installs/gh/2.93.0/gh_2.93.0_linux_amd64/bin/gh auth git-credential
